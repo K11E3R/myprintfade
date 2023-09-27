@@ -1,0 +1,9 @@
+README.md
+setup.cfg
+setup.py
+myprintfade/__init__.py
+myprintfade/animation.py
+myprintfade.egg-info/PKG-INFO
+myprintfade.egg-info/SOURCES.txt
+myprintfade.egg-info/dependency_links.txt
+myprintfade.egg-info/top_level.txt
