@@ -1,48 +1,72 @@
-# myprintfade
+# myprintfade v2.0
 
-**`myprintfade`** is a Python package that provides a simple way to create fading print animations in the terminal. It allows you to display text characters with a fading effect, adding a touch of visual appeal to your command-line applications.
+Next-gen **24-bit TrueColor terminal fade engine**, **TUI widgets**, **60 FPS async LLM token streamer**, and **Model Context Protocol (MCP)** visual telemetry server.
 
-### Installation
+Fully backward-compatible with `myprintfade` v0.2 (`from myprintfade import print_fade`), upgraded with zero external dependencies for the core engine.
 
-You can install `myprintfade` using pip:
+## Features in v2.0
+- **1D Wavefront & Glitch Cipher Reveal (`print_fade`)**: Sliding-window TrueColor interpolation with cubic/sine easing and Matrix/Cyberpunk cipher decoding.
+- **2D Shader ASCII Banner Fading (`fade_banner`)**: Radial shockwave and diagonal plasma sweeps across multi-line text blocks.
+- **Animated Code Diffs (`fade_diff`)**: Simultaneous cross-fade for unified diffs (`-` lines fade to dim ash, `+` lines brighten to neon emerald).
+- **240-Step Sub-Pixel Heatmap Meter (`fade_meter`)**: Uses Unicode eighth-blocks (`▏▎▍▌▋▊▉█`) with TrueColor gradients.
+- **Zero-Friction `@fade_task` Decorator**: Non-blocking background shimmer spinner that morphs into a completion badge on exit.
+- **MCP Server (`myprintfade-mcp`)**: Safely routes live terminal animations to `/dev/tty` (`CONOUT$` on Windows) so `sys.stdout` JSON-RPC streams remain 100% uncorrupted.
+
+## Installation
 
 ```bash
- > pip install myprintfade
+# Core library + CLI (Zero external dependencies)
+pip install myprintfade
+
+# With Model Context Protocol (MCP) server support
+pip install "myprintfade[mcp]"
 ```
 
-## Usage
-
-Once installed, you can use the `print_fade` function from the `myprintfade` package in your Python scripts. Here's how to use it:
+## Quick Start (Python API)
 
 ```python
-from myprintfade import print_fade
+import myprintfade as mpf
 
-# Display a fading print animation for "Hello, world!"
-print_fade("Hello, world!")
+# 1. Classic v0.2 call (100% backward compatible)
+mpf.print_fade("Hello, World!", delay=0.03, fade_steps=10)
+
+# 2. v2.0 Glitch Cipher Reveal with Theme
+mpf.print_fade("ACCESS GRANTED // NODE 04", mode="glitch", theme="cyberpunk")
+
+# 3. 2D Radial Shader Multi-Line Banner
+mpf.fade_banner("╔════════════════════╗\n║  MYPRINTFADE v2.0  ║\n╚════════════════════╝", theme="matrix", mode="radial")
+
+# 4. Sub-character TrueColor Heatmap Meter
+mpf.fade_meter("VRAM Allocation", target_pct=84.5)
+
+# 5. Animated Unified Code Diff
+mpf.fade_diff("- return token == 'secret'\n+ return hmac.compare_digest(token, secret)")
+
+# 6. Background Task Decorator
+@mpf.fade_task("Syncing product catalog")
+def sync():
+    import time; time.sleep(1.2)
+sync()
 ```
 
-The `print_fade` function accepts a message as its argument and displays it with a fading effect.
+## Command-Line Interface (CLI)
 
-### Parameters
-
-**`message`** (str): The text message you want to display with a fading effect.
-**`delay`** (float, optional): The delay between each character's appearance. Default is 0.05 seconds.
-**`fade_steps`** (int, optional): The number of steps in the fade effect. Default is 10.
-
-## Example
-
-```python
-from myprintfade import print_fade
-
-# Display a fading print animation for "Python"
-print_fade("Python", delay=0.02, fade_steps=8)
+```bash
+myprintfade "Deploying container stack..." --mode glitch --theme matrix
+git diff HEAD~1 | myprintfade --mode diff
+myprintfade "VRAM Usage" --meter 82.5
 ```
 
-## Author
+## MCP Server Configuration (Claude Desktop / Cursor / FastMCP)
 
->Yassine Naanani
->Email: <prs.online.00@gmail.com>
+Add to your `claude_desktop_config.json` or MCP client config:
 
-## Contributing
-
-Contributions are welcome! If you have any suggestions, bug reports, or feature requests, please open an issue on GitHub or submit a pull request.
+```json
+{
+  "mcpServers": {
+    "myprintfade": {
+      "command": "myprintfade-mcp"
+    }
+  }
+}
+```
