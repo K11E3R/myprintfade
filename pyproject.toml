@@ -10,7 +10,7 @@ readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.10"
 authors = [
-    { name = "k11E3R" }
+    { name = "Yassine Naanani", email = "prs.online.00@gmail.com" }
 ]
 keywords = ["terminal", "ansi", "fade", "cli", "tui", "mcp", "agents", "truecolor"]
 classifiers = [
